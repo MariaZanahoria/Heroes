@@ -1,4 +1,4 @@
-package com.wizeline.heroes
+package com.wizeline.heroes.model
 
 data class Characters(
     val code: Int,
