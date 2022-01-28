@@ -1,7 +1,6 @@
 package com.wizeline.heroes.adapters
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -17,7 +16,8 @@ import com.wizeline.heroes.HASH
 import com.wizeline.heroes.R
 import com.wizeline.heroes.TS
 
-class CharacterAdapter(val context: Context?) : ListAdapter<Result, CharacterAdapter.CatalogViewHolder>(ITEM_CALLBACK) {
+class CharacterAdapter(private val context: Context?, private val onClickListener:(Result)->Unit) :
+    ListAdapter<Result, CharacterAdapter.CatalogViewHolder>(ITEM_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CatalogViewHolder {
         val view = HeroItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -25,23 +25,32 @@ class CharacterAdapter(val context: Context?) : ListAdapter<Result, CharacterAda
     }
 
     override fun onBindViewHolder(holder: CatalogViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        val characterItem = getItem(position)
+        holder.itemView.setOnClickListener {
+            onClickListener.invoke(characterItem)
+        }
+        holder.bind(characterItem)
     }
 
-    class CatalogViewHolder(private val binding: HeroItemBinding, val context: Context?) :
+    class OnClickListener(val clickListener: (characterItem: Result) -> Unit) {
+        fun onClick(characterItem: Result) = clickListener(characterItem)
+    }
+
+    class CatalogViewHolder(private val binding: HeroItemBinding, private val context: Context?) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Result) {
             binding.tvName.text = item.name
             binding.tvDescription.text = item.description
             val options = RequestOptions().centerCrop()
                 .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-            Log.d("API", item.thumbnail.path + "/portrait_small.jpg?ts=$TS&apikey=$API_KEY&hash=$HASH")
             if (context != null) {
                 Glide.with(context)
-                    .load(item.thumbnail.path.replace("http", "https") + "/portrait_small.jpg?ts=$TS&apikey=$API_KEY&hash=$HASH")
+                    .asBitmap()
+                    .load(item.thumbnail?.path?.replace("http", "https") + "/portrait_small.jpg?ts=$TS&apikey=$API_KEY&hash=$HASH")
                     .apply(options)
+                    .centerCrop()
                     .placeholder(R.drawable.ic_launcher_foreground)
-                    .error(R.drawable.ic_search_purple)
+                    .error(R.drawable.ic_launcher_foreground)
                     .skipMemoryCache(true)//for caching the image url in case phone is offline
                     .into(binding.heroPhoto)
             }

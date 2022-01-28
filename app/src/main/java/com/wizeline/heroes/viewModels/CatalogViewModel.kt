@@ -7,18 +7,35 @@ import com.wizeline.heroes.model.Characters
 import com.wizeline.heroes.repositories.CatalogRepository
 import io.reactivex.disposables.CompositeDisposable
 
-class CharactersViewModel : ViewModel() {
-    private val catalogRepository = CatalogRepository()
+class CharactersViewModel(private val catalogRepository: CatalogRepository = CatalogRepository()) :
+    ViewModel() {
+
     private val compositeDisposable = CompositeDisposable()
+
     private val _characters = MutableLiveData<Characters>()
-    val characters: LiveData<Characters> get() = _characters
+    val characters: LiveData<Characters>
+    get()= _characters
+
+    private val _errorMessage = MutableLiveData<String>()
+    val errorMessage: LiveData<String>
+    get()= _errorMessage
 
     fun getCharacters() {
         compositeDisposable.add(
-            catalogRepository.requestCharacters().subscribe {
-                //add data to a liveData
-                _characters.postValue(it)
-            }
+            catalogRepository.requestCharacters()
+                .subscribe ({
+                    //add data to a liveData
+                    _characters.postValue(it)
+                },
+                    {
+                    error ->
+                        _errorMessage.value = error.message
+                    })
         )
+    }
+
+    override fun onCleared() {
+        compositeDisposable.clear()
+        super.onCleared()
     }
 }

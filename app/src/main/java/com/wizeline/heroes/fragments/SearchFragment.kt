@@ -25,10 +25,4 @@ class SearchFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
-
-    // override fun onCreate(savedInstanceState: Bundle?) {
-    //    super.onCreate(savedInstanceState)
-    //}
-
 }
