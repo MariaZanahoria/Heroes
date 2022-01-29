@@ -1,5 +1,7 @@
 package com.wizeline.heroes.model
 
+import com.google.gson.annotations.SerializedName
+
 data class Characters(
     val code: Int? = null,
     val status: String? = null,
@@ -15,10 +17,11 @@ data class Data(
     val limit: Int? = null,
     val total: Int? = null,
     val count: Int? = null,
-    val results: List<Result>? = null,
+    @SerializedName("results")
+    val characterInfo: List<CharacterInfo>? = null,
 )
 
-data class Result(
+data class CharacterInfo(
     val id: Int? = null,
     val name: String? = null,
     val description: String? = null,

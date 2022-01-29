@@ -29,7 +29,7 @@ class CharactersViewModel(private val catalogRepository: CatalogRepository = Cat
                 },
                     {
                     error ->
-                        _errorMessage.value = error.message
+                        _errorMessage.postValue(error.message)
                     })
         )
     }

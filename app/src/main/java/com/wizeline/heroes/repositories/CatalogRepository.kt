@@ -13,8 +13,14 @@ class CatalogRepository(private val service: HeroesServices = NetworkClient().ge
             .toObservable()
     }
 
-    fun requestCharacter(id: String): Observable<Characters> {
-        return service.getComicsOfCharacter(id, TS, API_KEY, HASH)
+    fun requestCharacterComics(id: Int): Observable<Characters> {
+        return service.getCharacterComics(id, TS, API_KEY, HASH)
+            .subscribeOn(Schedulers.io())
+            .toObservable()
+    }
+
+    fun requestCharacterSeries(id: Int): Observable<Characters> {
+        return service.getCharacterSeries(id, TS, API_KEY, HASH)
             .subscribeOn(Schedulers.io())
             .toObservable()
     }
