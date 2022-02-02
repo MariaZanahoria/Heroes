@@ -1,3 +1,9 @@
 <resources>
-  <string name="app_name">Heroes</string>
+    <string name="app_name">Heroes</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hero_photo_description">"Hero photo "</string>
+    <string name="catalog_nav">Catalog</string>
+    <string name="search_nav">Search</string>
+    <string name="results_title">Results</string>
+    <string name="heroes_label_fragment">Heroes</string>
 </resources>
