@@ -14,21 +14,20 @@ class CharactersViewModel(private val catalogRepository: CatalogRepository = Cat
 
     private val _characters = MutableLiveData<Characters>()
     val characters: LiveData<Characters>
-    get()= _characters
+        get() = _characters
 
     private val _errorMessage = MutableLiveData<String>()
     val errorMessage: LiveData<String>
-    get()= _errorMessage
+        get() = _errorMessage
 
     fun getCharacters() {
         compositeDisposable.add(
             catalogRepository.requestCharacters()
-                .subscribe ({
+                .subscribe({
                     //add data to a liveData
                     _characters.postValue(it)
                 },
-                    {
-                    error ->
+                    { error ->
                         _errorMessage.postValue(error.message)
                     })
         )

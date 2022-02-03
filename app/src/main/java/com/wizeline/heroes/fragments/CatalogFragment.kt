@@ -8,10 +8,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.wizeline.heroes.API_KEY
-import com.wizeline.heroes.HASH
-import com.wizeline.heroes.R
-import com.wizeline.heroes.TS
 import com.wizeline.heroes.adapters.CharacterAdapter
 import com.wizeline.heroes.databinding.FragmentCatalogBinding
 import com.wizeline.heroes.viewModels.CharactersViewModel
@@ -33,6 +29,7 @@ class CatalogFragment : Fragment() {
                 characterInfo.id ?: 0,
                 characterInfo.name.orEmpty(),
                 characterInfo.description.orEmpty(),
+                characterInfo.thumbnail?.getUrl() ?: ""
             )
             findNavController().navigate(action)
         }

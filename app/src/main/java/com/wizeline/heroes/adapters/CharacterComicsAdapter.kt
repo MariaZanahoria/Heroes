@@ -6,14 +6,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.wizeline.heroes.API_KEY
-import com.wizeline.heroes.HASH
 import com.wizeline.heroes.R
-import com.wizeline.heroes.TS
 import com.wizeline.heroes.databinding.ComicsItemBinding
 import com.wizeline.heroes.model.CharacterInfo
 
-class CharacterComicsAdapter : ListAdapter<CharacterInfo, CharacterComicsAdapter.ComicsViewHolder>(ITEM_CALLBACK) {
+class CharacterComicsAdapter :
+    ListAdapter<CharacterInfo, CharacterComicsAdapter.ComicsViewHolder>(ITEM_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ComicsViewHolder {
         val view = ComicsItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -28,12 +26,7 @@ class CharacterComicsAdapter : ListAdapter<CharacterInfo, CharacterComicsAdapter
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: CharacterInfo) {
             Glide.with(binding.root.context)
-                .load(
-                    item.thumbnail?.path?.replace(
-                        "http",
-                        "https"
-                    ) + "/portrait_small.jpg?ts=$TS&apikey=$API_KEY&hash=$HASH"
-                )
+                .load(item.thumbnail?.getUrl())
                 .placeholder(R.drawable.ic_launcher_foreground)
                 .error(R.drawable.ic_launcher_foreground)
                 .skipMemoryCache(true)//for caching the image url in case phone is offline

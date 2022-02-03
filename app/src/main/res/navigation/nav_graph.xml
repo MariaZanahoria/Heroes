@@ -38,5 +38,8 @@
         <argument
             android:name="character_description"
             app:argType="string" />
+        <argument
+            android:name="character_photo"
+            app:argType="string" />
     </fragment>
 </navigation>

@@ -1,6 +1,9 @@
 package com.wizeline.heroes.model
 
 import com.google.gson.annotations.SerializedName
+import com.wizeline.heroes.API_KEY
+import com.wizeline.heroes.HASH
+import com.wizeline.heroes.TS
 
 data class Characters(
     val code: Int? = null,
@@ -33,4 +36,11 @@ data class CharacterInfo(
 data class Thumbnail(
     val path: String? = null,
     val extension: String? = null
-)
+) {
+    fun getUrl(): String {
+        return path?.replace(
+            "http",
+            "https"
+        ) + "/portrait_small.jpg?ts=$TS&apikey=$API_KEY&hash=$HASH"
+    }
+}

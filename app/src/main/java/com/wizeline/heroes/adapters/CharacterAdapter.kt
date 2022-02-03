@@ -10,12 +10,9 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.wizeline.heroes.databinding.HeroItemBinding
 import com.wizeline.heroes.model.CharacterInfo
 import com.bumptech.glide.request.RequestOptions
-import com.wizeline.heroes.API_KEY
-import com.wizeline.heroes.HASH
 import com.wizeline.heroes.R
-import com.wizeline.heroes.TS
 
-class CharacterAdapter(private val onClickListener:(CharacterInfo)->Unit) :
+class CharacterAdapter(private val onClickListener: (CharacterInfo) -> Unit) :
     ListAdapter<CharacterInfo, CharacterAdapter.CatalogViewHolder>(ITEM_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CatalogViewHolder {
@@ -36,15 +33,14 @@ class CharacterAdapter(private val onClickListener:(CharacterInfo)->Unit) :
             binding.root.setOnClickListener { onClickListener(item) }
             val options = RequestOptions().centerCrop()
                 .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-                Glide.with(binding.root.context)
-                    .asBitmap()
-                    .load(item.thumbnail?.path?.replace("http", "https") + "/portrait_small.jpg?ts=$TS&apikey=$API_KEY&hash=$HASH")
-                    .apply(options)
-                    .centerCrop()
-                    .placeholder(R.drawable.ic_launcher_foreground)
-                    .error(R.drawable.ic_launcher_foreground)
-                    .skipMemoryCache(true)//for caching the image url in case phone is offline
-                    .into(binding.heroPhoto)
+            Glide.with(binding.root.context)
+                .asBitmap()
+                .load(item.thumbnail?.getUrl())
+                .apply(options)
+                .placeholder(R.drawable.ic_launcher_foreground)
+                .error(R.drawable.ic_launcher_foreground)
+                .skipMemoryCache(true)//for caching the image url in case phone is offline
+                .into(binding.heroPhoto)
         }
     }
 
@@ -54,7 +50,10 @@ class CharacterAdapter(private val onClickListener:(CharacterInfo)->Unit) :
                 return oldItem.id == newItem.id
             }
 
-            override fun areContentsTheSame(oldItem: CharacterInfo, newItem: CharacterInfo): Boolean {
+            override fun areContentsTheSame(
+                oldItem: CharacterInfo,
+                newItem: CharacterInfo
+            ): Boolean {
                 return oldItem == newItem
             }
         }

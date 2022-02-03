@@ -41,7 +41,7 @@ class DetailCharacterViewModel(private val catalogRepository: CatalogRepository 
             catalogRepository.requestCharacterSeries(id)
                 .subscribe({
                     //add data to a liveData
-                    _comics.postValue(it)
+                    _series.postValue(it)
                 },
                     { error ->
                         _errorMessage.postValue(error.message)
