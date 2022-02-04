@@ -25,4 +25,8 @@ class CatalogRepository(private val service: HeroesServices = NetworkClient().ge
             .subscribeOn(Schedulers.io())
             .toObservable()
     }
+
+    suspend fun getSearchedCharacters(nameToSearch: String): Characters {
+        return service.getSearchedCharacters(nameToSearch, TS, API_KEY, HASH)
+    }
 }

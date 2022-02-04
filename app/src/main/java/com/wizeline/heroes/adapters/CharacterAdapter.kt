@@ -30,6 +30,7 @@ class CharacterAdapter(private val onClickListener: (CharacterInfo) -> Unit) :
         fun bind(item: CharacterInfo) {
             binding.tvName.text = item.name
             binding.tvDescription.text = item.description
+            binding.tvNumberComics.text = binding.root.context.getString(R.string.comics_number,item.comics?.available?:0)
             binding.root.setOnClickListener { onClickListener(item) }
             val options = RequestOptions().centerCrop()
                 .diskCacheStrategy(DiskCacheStrategy.RESOURCE)

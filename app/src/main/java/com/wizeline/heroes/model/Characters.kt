@@ -30,7 +30,13 @@ data class CharacterInfo(
     val description: String? = null,
     val modified: String? = null,
     val thumbnail: Thumbnail? = null,
-    val resourceURI: String? = null
+    val resourceURI: String? = null,
+    val comics: ComicList? = null
+)
+
+data class ComicList(
+    val available: Int? = null,
+    val returned: Int? = null,
 )
 
 data class Thumbnail(

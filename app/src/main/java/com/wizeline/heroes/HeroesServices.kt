@@ -30,4 +30,12 @@ interface HeroesServices {
         @Query("apikey") apikey: String,
         @Query("hash") hash: String,
     ): Single<Characters>
+
+    @GET("characters")
+    suspend fun getSearchedCharacters(
+        @Query("nameStartsWith") nameStartsWith: String,
+        @Query("ts") ts: String,
+        @Query("apikey") apikey: String,
+        @Query("hash") hash: String,
+    ): Characters
 }
