@@ -55,7 +55,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_comics"
         android:layout_width="match_parent"
-        android:layout_height="110dp"
+        android:layout_height="100dp"
         android:layout_marginStart="4dp"
         android:layout_marginEnd="4dp"
         android:elevation="8dp"
@@ -89,7 +89,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_series"
         android:layout_width="match_parent"
-        android:layout_height="110dp"
+        android:layout_height="100dp"
         android:layout_marginStart="4dp"
         android:layout_marginEnd="4dp"
         android:elevation="8dp"

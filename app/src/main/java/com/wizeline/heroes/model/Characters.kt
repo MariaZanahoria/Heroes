@@ -1,7 +1,7 @@
 package com.wizeline.heroes.model
 
 import com.google.gson.annotations.SerializedName
-import com.wizeline.heroes.API_KEY
+import com.wizeline.heroes.BuildConfig.API_KEY
 import com.wizeline.heroes.HASH
 import com.wizeline.heroes.TS
 

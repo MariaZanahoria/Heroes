@@ -1,6 +1,7 @@
 package com.wizeline.heroes.repositories
 
 import com.wizeline.heroes.*
+import com.wizeline.heroes.BuildConfig.API_KEY
 import com.wizeline.heroes.model.Characters
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers

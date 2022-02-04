@@ -5,24 +5,72 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
+import android.widget.Toast
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.wizeline.heroes.adapters.CharacterAdapter
 import com.wizeline.heroes.databinding.FragmentSearchBinding
+import com.wizeline.heroes.viewModels.CharactersViewModel
 
-class SearchFragment : Fragment() {
+class SearchFragment : Fragment() {//, SearchView.OnQueryTextListener{
 
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
+    private lateinit var catalogAdapter: CharacterAdapter
+    private val catalogViewModel: CharactersViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        catalogAdapter = CharacterAdapter { characterInfo ->
+            val action = SearchFragmentDirections.actionSearchFragmentToDetailsFragment(
+                characterInfo.id ?: 0,
+                characterInfo.name.orEmpty(),
+                characterInfo.description.orEmpty(),
+                characterInfo.thumbnail?.getUrl() ?: ""
+            )
+            findNavController().navigate(action)
+        }
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
+        catalogViewModel.getCharacters()
+        catalogViewModel.characters.observe(viewLifecycleOwner) {
+            catalogAdapter.submitList(it.data?.characterInfo)
+        }
+        catalogViewModel.errorMessage.observe(viewLifecycleOwner) {
+            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+        }
+//        binding.svSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+//            override fun onQueryTextSubmit(query: String?): Boolean {
+//                binding.svSearch.clearFocus()
+//                if (catalogViewModel.characters.contains(query)) {
+//                    catalogAdapter.filter.filter(query)
+//                }
+//                return false
+//            }
+//            override fun onQueryTextChange(newText: String?): Boolean {
+//                    catalogAdapter.filter.filter(nextText)
+//                    return false
+//            }
+//        })
+
+        binding.rvHeroes.adapter = catalogAdapter
         return binding.root
     }
+
+//    override fun onQueryTextSubmit(p0: String?): Boolean {
+//        TODO("Not yet implemented")
+//    }
+//
+//    override fun onQueryTextChange(p0: String?): Boolean {
+//        TODO("Not yet implemented")
+//    }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
 }
+
