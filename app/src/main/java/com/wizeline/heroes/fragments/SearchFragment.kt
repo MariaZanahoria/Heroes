@@ -32,9 +32,6 @@ class SearchFragment : Fragment() {
         catalogAdapter = CharacterAdapter { characterInfo ->
             val action = SearchFragmentDirections.actionSearchFragmentToDetailsFragment(
                 characterInfo.id ?: 0,
-                characterInfo.name.orEmpty(),
-                characterInfo.description.orEmpty(),
-                characterInfo.thumbnail?.getUrl() ?: ""
             )
             findNavController().navigate(action)
         }

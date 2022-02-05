@@ -35,14 +35,5 @@
         <argument
             android:name="character_id"
             app:argType="integer" />
-        <argument
-            android:name="character_name"
-            app:argType="string" />
-        <argument
-            android:name="character_description"
-            app:argType="string" />
-        <argument
-            android:name="character_photo"
-            app:argType="string" />
     </fragment>
 </navigation>

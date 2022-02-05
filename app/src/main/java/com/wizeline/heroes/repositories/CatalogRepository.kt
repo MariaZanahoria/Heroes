@@ -2,6 +2,7 @@ package com.wizeline.heroes.repositories
 
 import com.wizeline.heroes.*
 import com.wizeline.heroes.BuildConfig.API_KEY
+import com.wizeline.heroes.model.CharacterDataWrapper
 import com.wizeline.heroes.model.Characters
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
@@ -22,6 +23,12 @@ class CatalogRepository(private val service: HeroesServices = NetworkClient().ge
 
     fun requestCharacterSeries(id: Int): Observable<Characters> {
         return service.getCharacterSeries(id, TS, API_KEY, HASH)
+            .subscribeOn(Schedulers.io())
+            .toObservable()
+    }
+
+    fun requestCharacter(id: Int): Observable<CharacterDataWrapper> {
+        return service.getCharacter(id, TS, API_KEY, HASH)
             .subscribeOn(Schedulers.io())
             .toObservable()
     }

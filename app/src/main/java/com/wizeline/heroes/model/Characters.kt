@@ -50,3 +50,13 @@ data class Thumbnail(
         ) + "/portrait_small.jpg?ts=$TS&apikey=$API_KEY&hash=$HASH"
     }
 }
+
+data class CharacterDataWrapper(
+    val code: Int? = null,
+    val status: String? = null,
+    val data: CharacterDataContainer? = null
+)
+
+data class CharacterDataContainer(
+    val results: List<CharacterInfo>? = null
+)

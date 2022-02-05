@@ -15,6 +15,7 @@ import com.wizeline.heroes.R
 import com.wizeline.heroes.adapters.CharacterComicsAdapter
 import com.wizeline.heroes.adapters.CharacterSeriesAdapter
 import com.wizeline.heroes.databinding.FragmentDetailsBinding
+import com.wizeline.heroes.model.CharacterInfo
 import com.wizeline.heroes.viewModels.DetailCharacterViewModel
 
 class DetailsFragment : Fragment() {
@@ -33,16 +34,16 @@ class DetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentDetailsBinding.inflate(inflater, container, false)
-        val amount = args.characterId
-        initViews()
         initAdapters()
-        initObservers(amount)
+        initObservers(args.characterId)
         return binding.root
     }
 
-    private fun initObservers(amount: Int) {
-        detailViewModel.getCharacterComics(amount)
-        detailViewModel.getCharacterSeries(amount)
+    private fun initObservers(id: Int) {
+        detailViewModel.getCharacterDetail(id)
+        detailViewModel.characterDetail.observe(viewLifecycleOwner) {
+            displayDetails(it)
+        }
         detailViewModel.comics.observe(viewLifecycleOwner) {
             comicsAdapter.submitList(it.data?.characterInfo)
         }
@@ -54,27 +55,29 @@ class DetailsFragment : Fragment() {
         }
     }
 
+    private fun displayDetails(characterInfo: CharacterInfo?) {
+        characterInfo?.let {
+            binding.tvNameHero.text = characterInfo.name
+            binding.tvDescription.text = characterInfo.description
+            val options = RequestOptions().centerCrop()
+                .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+            Glide.with(binding.root.context)
+                .asBitmap()
+                .load(characterInfo.thumbnail?.getUrl())
+                .apply(options)
+                .placeholder(R.drawable.ic_launcher_foreground)
+                .error(R.drawable.ic_launcher_foreground)
+                .override(450, 450)
+                .skipMemoryCache(true)//for caching the image url in case phone is offline
+                .into(binding.ivHero)
+        }
+    }
+
     private fun initAdapters() {
         comicsAdapter = CharacterComicsAdapter()
         seriesAdapter = CharacterSeriesAdapter()
         binding.rvComics.adapter = comicsAdapter
         binding.rvSeries.adapter = seriesAdapter
-    }
-
-    private fun initViews() {
-        binding.tvNameHero.text = args.characterName
-        binding.tvDescription.text = args.characterDescription
-        val options = RequestOptions().centerCrop()
-            .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-        Glide.with(binding.root.context)
-            .asBitmap()
-            .load(args.characterPhoto)
-            .apply(options)
-            .placeholder(R.drawable.ic_launcher_foreground)
-            .error(R.drawable.ic_launcher_foreground)
-            .override(450, 450)
-            .skipMemoryCache(true)//for caching the image url in case phone is offline
-            .into(binding.ivHero)
     }
 
     override fun onDestroyView() {
