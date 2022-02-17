@@ -1,7 +1,7 @@
 package com.wizeline.heroes.model
 
 import com.google.gson.annotations.SerializedName
-import com.wizeline.heroes.API_KEY
+import com.wizeline.heroes.BuildConfig.API_KEY
 import com.wizeline.heroes.HASH
 import com.wizeline.heroes.TS
 
@@ -30,7 +30,13 @@ data class CharacterInfo(
     val description: String? = null,
     val modified: String? = null,
     val thumbnail: Thumbnail? = null,
-    val resourceURI: String? = null
+    val resourceURI: String? = null,
+    val comics: ComicList? = null
+)
+
+data class ComicList(
+    val available: Int? = null,
+    val returned: Int? = null,
 )
 
 data class Thumbnail(
@@ -44,3 +50,13 @@ data class Thumbnail(
         ) + "/portrait_small.jpg?ts=$TS&apikey=$API_KEY&hash=$HASH"
     }
 }
+
+data class CharacterDataWrapper(
+    val code: Int? = null,
+    val status: String? = null,
+    val data: CharacterDataContainer? = null
+)
+
+data class CharacterDataContainer(
+    val results: List<CharacterInfo>? = null
+)

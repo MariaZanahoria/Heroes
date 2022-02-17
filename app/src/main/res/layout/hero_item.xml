@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="8dp"
+    android:elevation="8dp"
     android:background="#3BFF5722">
 
     <ImageView
@@ -33,11 +34,14 @@
 
     <TextView
         android:id="@+id/tv_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="6dp"
         android:textColor="#616161"
-        android:textSize="14sp"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_number_comics"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/tv_name"
         app:layout_constraintTop_toBottomOf="@+id/tv_name"
         tools:text="Description" />
@@ -54,5 +58,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/hero_photo"
         app:layout_constraintTop_toBottomOf="@+id/hero_photo"
-        tools:text="Number of comics" />
+        tools:text="@string/comics_number" />
 </androidx.constraintlayout.widget.ConstraintLayout>

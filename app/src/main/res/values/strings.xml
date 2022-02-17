@@ -9,4 +9,9 @@
     <string name="series_title">Series</string>
     <string name="comics_title">Comics</string>
     <string name="image_for_recyclerview">Image for recyclerview</string>
+    <string name="search_hint">Search by Hero</string>
+    <string name="error">This field can not be empty</string>
+    <string name="comics_number">Number of comics: %d</string>
+    <string name="heroes_label_search">Search Heroes</string>
+    <string name="heroes_label_details">Details</string>
 </resources>

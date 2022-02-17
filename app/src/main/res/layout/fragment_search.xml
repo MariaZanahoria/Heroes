@@ -5,40 +5,47 @@
     android:id="@+id/frameLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.SearchFragment" >
+    tools:context=".fragments.SearchFragment">
 
-    <androidx.appcompat.widget.SearchView
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/sv_search"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="10dp"
-        android:textSize="18sp"
-        app:iconifiedByDefault="false"
+        android:hint="@string/search_hint"
+        app:boxBackgroundColor="@android:color/white"
         app:layout_constraintBottom_toTopOf="@+id/tv_results_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:queryHint="Search">
-    </androidx.appcompat.widget.SearchView>
+        app:layout_constraintTop_toTopOf="parent">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textAutoComplete"
+            android:imeOptions="actionSearch"
+            android:textSize="18sp"
+            app:errorEnabled="true"
+        android:drawableEnd="@drawable/ic_search" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/tv_results_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
 
+        android:text="@string/results_title"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/sv_search"
-        app:layout_constraintTop_toBottomOf="@id/sv_search"
         app:layout_constraintBottom_toTopOf="@id/cv_heroes"
-        android:text="@string/results_title" />
+        app:layout_constraintStart_toStartOf="@+id/sv_search"
+        app:layout_constraintTop_toBottomOf="@id/sv_search" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_heroes"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"

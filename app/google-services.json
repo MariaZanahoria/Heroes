@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "375082517719",
+    "project_id": "heroes-e4acd",
+    "storage_bucket": "heroes-e4acd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:375082517719:android:1b9d98abf15d8701631c92",
+        "android_client_info": {
+          "package_name": "com.wizeline.heroes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "375082517719-4v7ofms55vmlsr5a71ei59geip5fml30.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.wizeline.heroes",
+            "certificate_hash": "6f04a65c7e68f61a3d9f8590d2ab4666b2595f17"
+          }
+        },
+        {
+          "client_id": "375082517719-74ghlp96iuujg3e2o7298tpkc8e3dsps.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASEuFcmRIt5YLFfvCsRFU22NR_FWShptY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "375082517719-74ghlp96iuujg3e2o7298tpkc8e3dsps.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

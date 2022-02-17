@@ -12,13 +12,16 @@
         tools:layout="@layout/fragment_catalog">
         <action
             android:id="@+id/action_catalogFragment_to_detailsFragment"
-            app:destination="@id/detailsFragment">
+            app:destination="@id/detailsFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/nav_graph"
+            app:popUpToInclusive="true">
         </action>
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.wizeline.heroes.fragments.SearchFragment"
-        android:label="fragment_search"
+        android:label="@string/heroes_label_search"
         tools:layout="@layout/fragment_search">
         <action
             android:id="@+id/action_searchFragment_to_detailsFragment"
@@ -27,19 +30,10 @@
     <fragment
         android:id="@+id/detailsFragment"
         android:name="com.wizeline.heroes.fragments.DetailsFragment"
-        android:label="fragment_details"
+        android:label="@string/heroes_label_details"
         tools:layout="@layout/fragment_details">
         <argument
             android:name="character_id"
             app:argType="integer" />
-        <argument
-            android:name="character_name"
-            app:argType="string" />
-        <argument
-            android:name="character_description"
-            app:argType="string" />
-        <argument
-            android:name="character_photo"
-            app:argType="string" />
     </fragment>
 </navigation>

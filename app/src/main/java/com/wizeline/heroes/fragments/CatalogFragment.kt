@@ -27,9 +27,6 @@ class CatalogFragment : Fragment() {
         catalogAdapter = CharacterAdapter { characterInfo ->
             val action = CatalogFragmentDirections.actionCatalogFragmentToDetailsFragment(
                 characterInfo.id ?: 0,
-                characterInfo.name.orEmpty(),
-                characterInfo.description.orEmpty(),
-                characterInfo.thumbnail?.getUrl() ?: ""
             )
             findNavController().navigate(action)
         }
