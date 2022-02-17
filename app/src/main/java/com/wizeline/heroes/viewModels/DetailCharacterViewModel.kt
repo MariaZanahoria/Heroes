@@ -7,25 +7,41 @@ import com.wizeline.heroes.model.Characters
 import com.wizeline.heroes.repositories.CatalogRepository
 import io.reactivex.disposables.CompositeDisposable
 
-class CharactersViewModel(private val catalogRepository: CatalogRepository = CatalogRepository()) :
+class DetailCharacterViewModel(private val catalogRepository: CatalogRepository = CatalogRepository()) :
     ViewModel() {
-
     private val compositeDisposable = CompositeDisposable()
 
-    private val _characters = MutableLiveData<Characters>()
-    val characters: LiveData<Characters>
-        get() = _characters
+    private val _comics = MutableLiveData<Characters>()
+    val comics: LiveData<Characters>
+        get() = _comics
+
+    private val _series = MutableLiveData<Characters>()
+    val series: LiveData<Characters>
+        get() = _series
 
     private val _errorMessage = MutableLiveData<String>()
     val errorMessage: LiveData<String>
         get() = _errorMessage
 
-    fun getCharacters() {
+    fun getCharacterComics(id: Int) {
         compositeDisposable.add(
-            catalogRepository.requestCharacters()
+            catalogRepository.requestCharacterComics(id)
                 .subscribe({
                     //add data to a liveData
-                    _characters.postValue(it)
+                    _comics.postValue(it)
+                },
+                    { error ->
+                        _errorMessage.postValue(error.message)
+                    })
+        )
+    }
+
+    fun getCharacterSeries(id: Int) {
+        compositeDisposable.add(
+            catalogRepository.requestCharacterSeries(id)
+                .subscribe({
+                    //add data to a liveData
+                    _series.postValue(it)
                 },
                     { error ->
                         _errorMessage.postValue(error.message)

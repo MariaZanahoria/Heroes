@@ -6,4 +6,7 @@
     <string name="search_nav">Search</string>
     <string name="results_title">Results</string>
     <string name="heroes_label_fragment">Heroes</string>
+    <string name="series_title">Series</string>
+    <string name="comics_title">Comics</string>
+    <string name="image_for_recyclerview">Image for recyclerview</string>
 </resources>

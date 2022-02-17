@@ -9,16 +9,17 @@
         android:id="@+id/catalogFragment"
         android:name="com.wizeline.heroes.fragments.CatalogFragment"
         android:label="@string/heroes_label_fragment"
-        tools:layout="@layout/fragment_catalog" >
+        tools:layout="@layout/fragment_catalog">
         <action
             android:id="@+id/action_catalogFragment_to_detailsFragment"
-            app:destination="@id/detailsFragment" />
+            app:destination="@id/detailsFragment">
+        </action>
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.wizeline.heroes.fragments.SearchFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" >
+        tools:layout="@layout/fragment_search">
         <action
             android:id="@+id/action_searchFragment_to_detailsFragment"
             app:destination="@id/detailsFragment" />
@@ -27,5 +28,18 @@
         android:id="@+id/detailsFragment"
         android:name="com.wizeline.heroes.fragments.DetailsFragment"
         android:label="fragment_details"
-        tools:layout="@layout/fragment_details" />
+        tools:layout="@layout/fragment_details">
+        <argument
+            android:name="character_id"
+            app:argType="integer" />
+        <argument
+            android:name="character_name"
+            app:argType="string" />
+        <argument
+            android:name="character_description"
+            app:argType="string" />
+        <argument
+            android:name="character_photo"
+            app:argType="string" />
+    </fragment>
 </navigation>
